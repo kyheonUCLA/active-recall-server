@@ -1,8 +1,8 @@
 import express from 'express';
 
-import twilioRouter from './api/twilio';
-import openaiRouter from './api/openai';
-import testRouter from './api/test';
+import twilioRouter from './api/twilio.routes';
+import openaiRouter from './api/openai.routes';
+import testRouter from './api/test.routes';
 
 const rootRouter = express.Router();
 
