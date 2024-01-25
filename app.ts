@@ -1,21 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv';  
 dotenv.config();
 
-import rootRouter from './routes/root';
+import rootRouter from './routes/index';
+import connectToDB from './utils/connectToDB';
 
 const app = express();
 
-// middle ware for cross-origin-resource-sharing
-const corsConfig = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
+// connect to db
+//connectToDB()
 
-app.use(cors(corsConfig));
+
+// middle ware for cross-origin-resource-sharing
+app.use(cors());
 
 // middleware to allow us to get form data
 app.use(express.urlencoded({ extended: false }));

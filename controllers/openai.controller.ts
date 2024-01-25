@@ -1,3 +1,4 @@
+// https logic layer ("manager")
 import OpenAI from "openai";
 import { Request, Response } from "express"
 
@@ -16,4 +17,6 @@ const getCompletion = async (req: Request, res: Response) => {
   }
 }
 
-export { getCompletion }
+const openaiController = { getCompletion }
+
+export default openaiController;
