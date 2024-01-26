@@ -10,14 +10,11 @@ import {
 import argon2 from "argon2";
 import { nanoid } from "nanoid";
 
-@pre<User>('save', async () => {
-  // @ts-ignore
+@pre<User>('save', async function () {
   if (!this.isModified('password')) {
     return;
   }
-  // @ts-ignore
   const hash = await argon2.hash(this.password);
-  // @ts-ignore
   this.password = hash;
 })
 @modelOptions({

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';  
-import config from "config"
 
 dotenv.config();
 
@@ -12,7 +11,6 @@ const app = express();
 
 // connect to db
 //connectToDB()
-
 
 // middle ware for cross-origin-resource-sharing
 app.use(cors());

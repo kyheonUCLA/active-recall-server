@@ -2,12 +2,13 @@ import mongoose from "mongoose";
 import log from "./logger";
 
 const connectToDB = async () => {
-  const { MONGO_URI } = process.env;
+  const { MONGO_URI, MONGO_USERNAME, MONGO_PASSWORD } = process.env;
+  
   try {
     await mongoose.connect(MONGO_URI as string);
-    log.info('Connected');
+    log.info('Connected to DB');
   } catch (e) { 
-    log.info('Failed');
+    log.info('Connection Failed');
     process.exit(1);
   }
 }
