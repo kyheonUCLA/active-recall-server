@@ -8,9 +8,8 @@ import {
 } from "@typegoose/typegoose";
 
 import argon2 from "argon2";
+import { nanoid } from "nanoid";
 
-
-// @ts-ignore
 @pre<User>('save', async () => {
   // @ts-ignore
   if (!this.isModified('password')) {
@@ -21,7 +20,6 @@ import argon2 from "argon2";
   // @ts-ignore
   this.password = hash;
 })
-// @ts-ignore
 @modelOptions({
   schemaOptions: {
     timestamps: true,
@@ -30,25 +28,24 @@ import argon2 from "argon2";
   }
 })
 class User {
-  // @ts-ignore
   @prop({ lowercase: true, required: true, unique: true })
   email: string;
-  // @ts-ignore
+
   @prop({ required: true })
   firstName: string;
-  // @ts-ignore
+ 
   @prop({ required: true })
   lastName: string;
-  // @ts-ignore
+
   @prop({ required: true })
   password: string;
-  // @ts-ignore
+  
   @prop({ required: true, default: () => nanoid() })
   verificationCode: string;
-  // @ts-ignore
+ 
   @prop()
   passwordResetCode: string | null;
-  // @ts-ignore
+  
   @prop({ default: false })
   verified: boolean;
 
