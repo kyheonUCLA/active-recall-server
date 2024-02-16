@@ -5,11 +5,11 @@ import openaiRouter from './api/openai.routes';
 import testRouter from './api/test.routes';
 import userRouter from './api/user.routes';
 
-const rootRouter = express.Router();
+const router = express.Router();
 
-rootRouter.use('/api/twilio', twilioRouter);
-rootRouter.use('/api/test', testRouter);
-rootRouter.use('/api/openai', openaiRouter);
-rootRouter.use('/api/user', userRouter);
+router.use('/api/twilio', twilioRouter);
+router.use('/api/test', testRouter);
+router.use('/api/openai', openaiRouter);
+router.use('/api/users', userRouter);
 
-export default rootRouter
+export default router

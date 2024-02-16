@@ -5,7 +5,7 @@ import userController from "../../controllers/user.controller";
 
 const userRouter = express.Router();
 
-userRouter.post('/users', validateResource(createUserSchema), userController.createUserHandler);
+userRouter.post('/', validateResource(createUserSchema), userController.createUserHandler);
 
 
 

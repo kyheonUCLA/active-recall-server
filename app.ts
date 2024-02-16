@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import rootRouter from './routes/index';
+import router from './routes/index';
 import connectToDB from './utils/connectToDB';
 
 const app = express();
@@ -21,6 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 // middleware to allow us to get json data
 app.use(express.json());
 
-app.use('/', rootRouter)
+app.use('/', router)
 
 export default app;

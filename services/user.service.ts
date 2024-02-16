@@ -4,7 +4,10 @@ const createUser = (input: Partial<User>) => {
   return UserModel.create(input);
 }
 
+const findUserById = (id: string) => {
+  return UserModel.findById(id);
+}
 
-const userService = { createUser }
 
-export default userService;
+
+export default { createUser, findUserById };
