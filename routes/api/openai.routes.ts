@@ -1,9 +1,12 @@
 import express from "express";
 
-import openaiController from "../../controllers/openai.controller";
+import { saveInput } from "../../controllers/openai.controller";
+
 import { validateOpenaiRequest } from "../../middleware/validation";
 
 const openaiRouter = express.Router();
 
-openaiRouter.post('/', validateOpenaiRequest, openaiController.getCompletion);
+
+openaiRouter.post('/', validateOpenaiRequest, saveInput);
+
 export default openaiRouter;
