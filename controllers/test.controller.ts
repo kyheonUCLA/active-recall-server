@@ -31,4 +31,6 @@ const deleteTest = (req: Request, res: Response) => {
   res.json({"id": req.body.id})
 }
 
-export {getTest, createTest, deleteTest, updateTest}
+const testController = {getTest, createTest, deleteTest, updateTest}
+
+export default testController

@@ -1,3 +1,4 @@
+// https logic layer ("manager")
 import OpenAI from "openai";
 import { Request, Response } from "express"
 
