@@ -25,7 +25,7 @@ const saveInput = async (req: Request, res: Response) => {
         { role: "user", content: req.body.prompt}]
     });
 
-    // Store OpenAI questions, prompt, url, and web page
+    // Parse OpenAI response and return JSON object with question, choices, answer, and OpenAI response
     function parseResponse(response: string) {
       const lines = response.split('\n');
   
