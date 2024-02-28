@@ -1,6 +1,7 @@
 // https logic layer ("manager")
 import OpenAI from "openai";
 import { Request, Response } from "express"
+import reviewProblemType from "../utils/types"
 import reviewProblemService from "../services/reviewProblem.service"
 
 const { OPENAI_API_KEY } = process.env;
@@ -27,9 +28,10 @@ const saveInput = async (req: Request, res: Response) => {
     });
 
     // Parse OpenAI response and return JSON object with question, choices, and solution
-    function parseResponse(response: string) {
+    function parseResponse(response: string): reviewProblemType {
       const lines = response.split('\n');
 
+      // Follows reviewProblemType interface structure... there is probably a better way of doing this 
       let question = '';
       let choices: Record<string, string> = {};
       let solution: Record<string, string> = {};
@@ -60,7 +62,9 @@ const saveInput = async (req: Request, res: Response) => {
   const content = result.choices[0].message.content;
 
   if (content !== null) {
-    const parsedResponse = res.json(parseResponse(content));
+    const parsedRes: reviewProblemType = parseResponse(content);
+    reviewProblemService.createReviewProblem(parsedRes);
+    res.json(parsedRes);
 
   } else {
     res.status(500).send("Content is null");
