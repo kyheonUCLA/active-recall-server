@@ -1,6 +1,7 @@
 import reviewProblem from "../models/reviewProblem.model";
+import reviewProblemType from "../utils/types"
 
-const createReviewProblem = (input:  ) => {
+const createReviewProblem = (input: reviewProblemType ) => {
     return reviewProblem.create();
 }
 
