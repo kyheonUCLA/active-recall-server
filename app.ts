@@ -6,11 +6,13 @@ dotenv.config();
 
 import router from './routes/index';
 import connectToDB from './utils/connectToDB';
-
 const app = express();
 
 // connect to db
-//connectToDB()
+// connectToDB()
+// const astradb = connectToAstra()
+// console.log(astradb)
+
 
 // middle ware for cross-origin-resource-sharing
 app.use(cors());
