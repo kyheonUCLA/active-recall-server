@@ -1,6 +1,7 @@
 // https logic layer ("manager")
 import OpenAI from "openai";
 import { Request, Response } from "express"
+import reviewProblemService from "../services/reviewProblem.service"
 
 const { OPENAI_API_KEY } = process.env;
 const openaiClient = new OpenAI({ apiKey: OPENAI_API_KEY });
@@ -25,10 +26,10 @@ const saveInput = async (req: Request, res: Response) => {
         { role: "user", content: req.body.prompt}]
     });
 
-    // Parse OpenAI response and return JSON object with question, choices, answer, and OpenAI response
+    // Parse OpenAI response and return JSON object with question, choices, and solution
     function parseResponse(response: string) {
       const lines = response.split('\n');
-  
+
       let question = '';
       let choices: Record<string, string> = {};
       let solution: Record<string, string> = {};
@@ -53,14 +54,14 @@ const saveInput = async (req: Request, res: Response) => {
           question: question,
           choices: choices,
           solution: solution,
-          response: response
       };
     }
     
   const content = result.choices[0].message.content;
 
   if (content !== null) {
-    res.json(parseResponse(content));
+    const parsedResponse = res.json(parseResponse(content));
+
   } else {
     res.status(500).send("Content is null");
   }
