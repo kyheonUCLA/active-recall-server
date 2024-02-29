@@ -33,10 +33,11 @@ const createQuiz = async (req: Request, res: Response) => {
   Answer: "Answer here"
   \n`
 
+  // why does the simple prompt work better than the template?????
   const queryEngine = index.asQueryEngine();
   const queryEngineRes = await queryEngine.query({ 
-    query: promptTemplate.replace("{contextStr}", contextStr)
-  });
+    query: "Create 5 multiple choice question with 4 possible answers"
+  })
 
   res.status(200).json({"quiz": queryEngineRes.response});
 }
