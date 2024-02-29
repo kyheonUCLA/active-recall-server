@@ -10,7 +10,7 @@ const sendSMS = async (message: string, phone: string) => {
       body: message,
       from: TWILIO_PHONE_NUMBER,
       to: phone,
-    });
+    })
   } catch (error) {
     console.log('err', error)
   }
