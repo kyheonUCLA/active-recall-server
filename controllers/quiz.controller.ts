@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { storageContextFromDefaults, VectorStoreIndex, OpenAI, TextNode } from "llamaindex"
 import { SimpleHTMLReader } from "../utils/SimpleHtmlReader";
 import astraService from "../services/astra.service";
-import { sendSMS } from "./twilio.controller";
+import twilioService from "../services/twilio.service";
 
 
 const createQuiz = async (req: Request, res: Response) => {
@@ -39,7 +39,9 @@ const createQuiz = async (req: Request, res: Response) => {
     query: "Create 5 multiple choice question with 4 possible answers"
   })
 
-  res.status(200).json({"quiz": queryEngineRes.response});
+  const twilioRes = await twilioService.sendSMS(queryEngineRes.response, req.body.phone1)
+
+  res.status(200).json({"quiz": queryEngineRes.response, "sms": twilioRes});
 }
 
 
