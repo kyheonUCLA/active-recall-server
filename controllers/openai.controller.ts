@@ -64,8 +64,7 @@ const saveInput = async (req: Request, res: Response) => {
   if (content !== null) {
     const parsedRes: reviewProblemType = parseResponse(content);
     reviewProblemService.createReviewProblem(parsedRes);
-    res.json(parsedRes);
-
+    res.json(parsedRes); //Don't need this
   } else {
     res.status(500).send("Content is null");
   }
