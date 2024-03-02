@@ -9,7 +9,8 @@ import connectToDB from './utils/connectToDB';
 const app = express();
 
 // connect to db
-// connectToDB()
+connectToDB()
+
 // const astradb = connectToAstra()
 // console.log(astradb)
 
