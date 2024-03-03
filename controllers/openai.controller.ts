@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import { Request, Response } from "express"
 import reviewProblemType from "../utils/types"
 import reviewProblemService from "../services/reviewProblem.service"
+import twilioService from "../services/twilio.service";
 
 const { OPENAI_API_KEY } = process.env;
 const openaiClient = new OpenAI({ apiKey: OPENAI_API_KEY });
@@ -30,6 +31,7 @@ const saveInput = async (req: Request, res: Response) => {
     // Parse OpenAI response and return JSON object with question, choices, and solution
     function parseResponse(response: string): reviewProblemType {
       const lines = response.split('\n');
+      console.log(lines) //testing
 
       // Follows reviewProblemType interface structure... there is probably a better way of doing this 
       let question = '';
@@ -64,7 +66,12 @@ const saveInput = async (req: Request, res: Response) => {
   if (content !== null) {
     const parsedRes: reviewProblemType = parseResponse(content);
     reviewProblemService.createReviewProblem(parsedRes);
-    res.json(parsedRes); //Don't need this
+
+    // Testing sending text
+    const latestProblem = await reviewProblemService.findReviewProblem();
+    await twilioService.sendSMS(latestProblem, "+17073647667");
+    await twilioService.sendSMS(latestProblem, "+19256582504");
+    res.json(parsedRes);
   } else {
     res.status(500).send("Content is null");
   }
